@@ -1,12 +1,20 @@
-import { PropsWithChildren } from "react";
-import { redirect } from "next/navigation";
-import { authOptions } from "@/lib/auth";
-import { getServerSession } from "next-auth/next";
+"use client";
 
-export default async function AuthLayout({ children }: PropsWithChildren) {
-  const session = await getServerSession(authOptions);
+import { PropsWithChildren, useEffect } from "react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
-  if (session) return redirect("/dashboard");
+export default function AuthLayout({ children }: PropsWithChildren) {
+  const { data: session } = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (session) {
+      router.push("/");
+    }
+  }, [session, router]);
+
+  if (session) return null;
 
   return <>{children}</>;
 }

@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
-import { Figtree, Geist, Geist_Mono } from "next/font/google";
+import { Figtree } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
-import AuthWrapper from "@/components/AuthWrapper";
-import Navbar from "@/components/organisms/nav/Navbar";
 import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
@@ -32,13 +30,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <AuthWrapper>
-            <main className="font-figtree">
-              <Navbar />
-              {children}
-              <Toaster richColors />
-            </main>
-          </AuthWrapper>
+          <main className="font-figtree">
+            {children}
+            <Toaster richColors />
+          </main>
         </ThemeProvider>
       </body>
     </html>

@@ -42,7 +42,7 @@ export default function LoginPage() {
         "Welcome back! You have successfully logged into your account.",
     });
 
-    router.push("/dashboard");
+    router.push("/");
   };
 
   return (

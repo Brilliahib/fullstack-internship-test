@@ -7,11 +7,16 @@ import { Auth } from "@/types/auth/auth";
 
 declare module "next-auth" {
   interface User {
-    token?: string;
+    id: string;
+    name: string;
+    username: string;
+    phone: string;
+    email: string;
+    token: string;
   }
 
   interface Session {
-    user: Auth;
+    user: Omit<User, "token">;
     access_token: string;
   }
 }
@@ -29,14 +34,17 @@ export const authOptions: NextAuthOptions = {
         if (!username || !password) return null;
 
         try {
-          const user = await loginApiHandler({
-            username,
-            password,
-          });
+          const response = await loginApiHandler({ username, password });
+          const { token, user } = response;
 
-          if (!user) return null;
-          return user;
+          if (!user || !token) return null;
+
+          return {
+            ...user,
+            token,
+          };
         } catch (error) {
+          console.error("Login error:", error);
           return null;
         }
       },
@@ -47,14 +55,24 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         token.access_token = user.token;
         token.sub = user.id;
+        token.name = user.name;
+        token.email = user.email;
       }
       return token;
     },
     session: async ({ session, token }) => {
       const access_token = token.access_token as string;
-      const auth = await getAuthApiHandler(access_token);
+      session.access_token = access_token;
 
-      return { ...session, user: auth, access_token };
+      session.user = {
+        id: token.sub as string,
+        name: token.name as string,
+        username: token.username as string,
+        phone: token.phone as string,
+        email: token.email as string,
+      };
+
+      return session;
     },
   },
 };
