@@ -1,6 +1,7 @@
 "use client";
 
 import Pagination from "@/components/molecules/pagination/Pagination";
+import { useGetAllDivision } from "@/http/division/get-all-division";
 import { useGetAllEmployees } from "@/http/employees/get-all-employees";
 import { Plus } from "lucide-react";
 import { useSession } from "next-auth/react";
@@ -24,6 +25,14 @@ export default function EmployeesContent() {
     session?.access_token as string,
     query,
     divisionId,
+    {
+      enabled: status === "authenticated",
+    }
+  );
+
+  const { data: division } = useGetAllDivision(
+    session?.access_token as string,
+    query,
     {
       enabled: status === "authenticated",
     }
@@ -60,14 +69,14 @@ export default function EmployeesContent() {
           <select
             value={divisionId || ""}
             onChange={handleDivisionChange}
-            className="p-2 px-4 border rounded bg-background rounded-full max-w-sm w-full"
+            className=" px-4 border rounded-sm bg-background rounded-full w-full max-w-[200px]"
           >
-            <option value="">Select Division</option>
-            <option value="0f997520-08d3-4fb8-910e-de2ccaa71a77">
-              Full Stack
-            </option>
+            <option value="">All Division</option>
+            {division?.data.divisions.map((division) => (
+              <option value={division.id}>{division.name}</option>
+            ))}
           </select>
-          <button className="w-fit bg-primary font-semibold text-white px-4 py-1 text-sm rounded-md hover:bg-primary/80 flex items-center gap-2">
+          <button className="w-fit bg-primary font-semibold text-white px-4  py-1 text-sm rounded-md hover:bg-primary/80 flex items-center gap-2">
             <Plus className="h-4 w-4" />
             Create Employee
           </button>
