@@ -5,6 +5,7 @@ import { useGetAllDivision } from "@/http/division/get-all-division";
 import { useGetAllEmployees } from "@/http/employees/get-all-employees";
 import { Plus } from "lucide-react";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
@@ -76,9 +77,15 @@ export default function EmployeesContent() {
               <option value={division.id}>{division.name}</option>
             ))}
           </select>
-          <button className="w-fit bg-primary font-semibold text-white px-4  py-1 text-sm rounded-md hover:bg-primary/80 flex items-center gap-2">
-            <Plus className="h-4 w-4" />
-            Create Employee
+
+          <button className="w-fit bg-primary font-semibold text-white px-4  py-1 text-sm rounded-md hover:bg-primary/80">
+            <Link
+              href={"/employees/create"}
+              className="flex items-center gap-2"
+            >
+              <Plus className="h-4 w-4" />
+              Create Employee
+            </Link>
           </button>
         </div>
         <table className="w-full table-auto border-collapse border border-gray-300">
