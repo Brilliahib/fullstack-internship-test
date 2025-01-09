@@ -56,23 +56,17 @@ export const authOptions: NextAuthOptions = {
         token.access_token = user.token;
         token.sub = user.id;
         token.name = user.name;
+        token.username = user.username;
+        token.phone = user.phone;
         token.email = user.email;
       }
       return token;
     },
     session: async ({ session, token }) => {
       const access_token = token.access_token as string;
-      session.access_token = access_token;
+      const auth = await getAuthApiHandler(access_token);
 
-      session.user = {
-        id: token.sub as string,
-        name: token.name as string,
-        username: token.username as string,
-        phone: token.phone as string,
-        email: token.email as string,
-      };
-
-      return session;
+      return { ...session, user: auth, access_token };
     },
   },
 };
