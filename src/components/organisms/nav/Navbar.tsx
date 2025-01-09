@@ -25,23 +25,23 @@ export default function Navbar() {
 
   const handleThemeChange = (newTheme: string) => {
     setTheme(newTheme);
-    setDropdownOpen(false); // Tutup dropdown setelah memilih tema
+    setDropdownOpen(false);
   };
 
   return (
-    <nav className="bg-blue-500 text-white p-4 flex justify-between items-center">
+    <nav className="bg-background p-4 flex justify-between items-center">
       <h1 className="text-lg font-bold">Employee Management</h1>
       <div className="relative">
         {user && (
           <button
             onClick={() => setDropdownOpen((prev) => !prev)}
-            className="px-4 py-2 bg-blue-700 rounded hover:bg-blue-600"
+            className="px-4 py-2 rounded-full border"
           >
             {user}
           </button>
         )}
         {dropdownOpen && (
-          <div className="absolute right-0 mt-2 w-48 bg-white text-black shadow-lg rounded">
+          <div className="absolute right-0 mt-2 w-48 bg-white text-black shadow-lg rounded-md">
             <button
               onClick={handleLogout}
               className="w-full text-left px-4 py-2 hover:bg-gray-100"

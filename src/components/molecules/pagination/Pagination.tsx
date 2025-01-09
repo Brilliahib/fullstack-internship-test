@@ -1,3 +1,5 @@
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
 interface PaginationProps {
   totalItems: number;
   itemsPerPage: number;
@@ -16,19 +18,19 @@ export default function Pagination({
   if (totalPages === 1) return null;
 
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-end py-4">
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="px-4 py-2 mx-1 border rounded bg-background disabled:opacity-50"
+        className="px-3 py-2 mx-1 border rounded bg-background disabled:opacity-50"
       >
-        Previous
+        <ChevronLeft />
       </button>
       {Array.from({ length: totalPages }, (_, index) => (
         <button
           key={index}
           onClick={() => onPageChange(index + 1)}
-          className={`px-4 py-2 mx-1 border rounded ${
+          className={`px-4 py-2 mx-1 border rounded-md ${
             currentPage === index + 1
               ? "bg-blue-500 text-white"
               : "bg-background"
@@ -40,9 +42,9 @@ export default function Pagination({
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="px-4 py-2 mx-1 border rounded bg-background disabled:opacity-50"
+        className="px-3 py-1 mx-1 border rounded bg-background disabled:opacity-50"
       >
-        Next
+        <ChevronRight />
       </button>
     </div>
   );

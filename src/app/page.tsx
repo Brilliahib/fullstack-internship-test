@@ -56,9 +56,7 @@ export default function EmployeesPage() {
   );
 
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Employee Management</h1>
-
+    <div className="pad-x-xl py-8">
       <div className="mb-4">
         <input
           type="text"
