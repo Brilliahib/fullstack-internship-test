@@ -67,28 +67,30 @@ export default function EmployeesContent() {
             placeholder="Search employees..."
             className="p-2 px-4 border rounded bg-background rounded-full max-w-sm w-full"
           />
-          <select
-            value={divisionId || ""}
-            onChange={handleDivisionChange}
-            className=" px-4 border rounded-sm bg-background rounded-full w-full max-w-[200px]"
-          >
-            <option value="">All Division</option>
-            {division?.data.divisions.map((division) => (
-              <option value={division.id}>{division.name}</option>
-            ))}
-          </select>
-
-          <button className="w-fit bg-primary font-semibold text-white px-4  py-1 text-sm rounded-md hover:bg-primary/80">
-            <Link
-              href={"/employees/create"}
-              className="flex items-center gap-2"
+          <div className="flex gap-4 w-full justify-end">
+            <select
+              value={divisionId || ""}
+              onChange={handleDivisionChange}
+              className=" px-4 border rounded-sm bg-background rounded-full w-full max-w-[200px]"
             >
-              <Plus className="h-4 w-4" />
-              Create Employee
-            </Link>
-          </button>
+              <option value="">All Division</option>
+              {division?.data.divisions.map((division) => (
+                <option value={division.id}>{division.name}</option>
+              ))}
+            </select>
+
+            <button className="w-fit bg-primary font-semibold text-white px-4  py-1 text-sm rounded-md hover:bg-primary/80">
+              <Link
+                href={"/employees/create"}
+                className="flex items-center gap-2"
+              >
+                <Plus className="h-4 w-4" />
+                Create Employee
+              </Link>
+            </button>
+          </div>
         </div>
-        <table className="w-full table-auto border-collapse border border-gray-300">
+        <table className="w-full table-auto border-collapse border border-gray-300 rounded-xl">
           <thead>
             <tr>
               <th className="border border-gray-300 p-2">Name</th>
@@ -110,7 +112,7 @@ export default function EmployeesContent() {
                 </td>
               </tr>
             ))}
-            {data?.data.employees.length === 0 && (
+            {!data?.data.employees && (
               <tr>
                 <td colSpan={4} className="text-center p-4">
                   No employees found.
