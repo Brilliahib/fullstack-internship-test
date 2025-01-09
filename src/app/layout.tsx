@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import AuthWrapper from "@/components/AuthWrapper";
 import Navbar from "@/components/organisms/nav/Navbar";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -35,6 +36,7 @@ export default function RootLayout({
             <main className="font-figtree">
               <Navbar />
               {children}
+              <Toaster richColors />
             </main>
           </AuthWrapper>
         </ThemeProvider>
