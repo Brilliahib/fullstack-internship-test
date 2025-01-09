@@ -30,9 +30,9 @@ export default function Pagination({
         <button
           key={index}
           onClick={() => onPageChange(index + 1)}
-          className={`px-4 py-2 mx-1 border rounded-md ${
+          className={`px-4 py-2 mx-1 border shadow-sm rounded-md ${
             currentPage === index + 1
-              ? "bg-blue-500 text-white"
+              ? "bg-primary text-white"
               : "bg-background"
           }`}
         >

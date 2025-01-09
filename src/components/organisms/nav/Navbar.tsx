@@ -29,7 +29,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-background p-4 flex justify-between items-center">
+    <nav className="bg-background p-4 flex justify-between items-center border shadow-sm border-b-2">
       <h1 className="text-lg font-bold">Employee Management</h1>
       <div className="relative">
         {user && (

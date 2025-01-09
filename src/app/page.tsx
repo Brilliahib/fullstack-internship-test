@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { getEmployees, saveEmployees, Employee } from "@/utils/employee";
 import Pagination from "@/components/molecules/pagination/Pagination";
+import { Plus } from "lucide-react";
 
 export default function EmployeesPage() {
   const [employees, setEmployees] = useState<Employee[]>([]);
@@ -57,16 +58,19 @@ export default function EmployeesPage() {
 
   return (
     <div className="pad-x-xl py-8">
-      <div className="mb-4">
+      <div className="flex justify-between mb-8">
         <input
           type="text"
           value={query}
           onChange={handleSearch}
           placeholder="Search employees..."
-          className="w-full p-2 px-4 border rounded bg-background rounded-full"
+          className="p-2 px-4 border rounded bg-background rounded-full max-w-sm w-full"
         />
+        <button className="w-fit bg-primary font-semibold text-white px-4 py-1 text-sm rounded-md hover:bg-primary/80 flex items-center gap-2">
+          <Plus className="h-4 w-4" />
+          Create Employee
+        </button>
       </div>
-
       <table className="w-full table-auto border-collapse border border-gray-300">
         <thead>
           <tr>
