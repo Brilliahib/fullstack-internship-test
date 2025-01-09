@@ -13,12 +13,20 @@ interface GetAllEmployeesResponse {
 }
 
 export const GetAllEmployeesHandler = async (
-  token: string
+  token: string,
+  query: string,
+  divisionId: string | null
 ): Promise<GetAllEmployeesResponse> => {
+  const params: Record<string, string | undefined> = {
+    name: query || undefined,
+    division_id: divisionId || undefined,
+  };
+
   const { data } = await api.get<GetAllEmployeesResponse>("/employees", {
     headers: {
       Authorization: `Bearer ${token}`,
     },
+    params, // menambahkan query parameters
   });
 
   return data;
@@ -26,11 +34,13 @@ export const GetAllEmployeesHandler = async (
 
 export const useGetAllEmployees = (
   token: string,
+  query: string,
+  divisionId: string | null,
   options?: Partial<UseQueryOptions<GetAllEmployeesResponse, AxiosError>>
 ) => {
   return useQuery({
-    queryKey: ["employees-list"],
-    queryFn: () => GetAllEmployeesHandler(token),
+    queryKey: ["employees-list", query, divisionId],
+    queryFn: () => GetAllEmployeesHandler(token, query, divisionId),
     ...options,
   });
 };

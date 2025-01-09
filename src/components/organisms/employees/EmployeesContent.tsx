@@ -16,9 +16,14 @@ export default function EmployeesContent() {
     Number(searchParams.get("page")) || 1
   );
   const [query, setQuery] = useState(searchParams.get("query") || "");
+  const [divisionId, setDivisionId] = useState<string | null>(
+    searchParams.get("division_id") || null
+  );
 
   const { data, isPending } = useGetAllEmployees(
     session?.access_token as string,
+    query,
+    divisionId,
     {
       enabled: status === "authenticated",
     }
@@ -27,12 +32,18 @@ export default function EmployeesContent() {
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
     setCurrentPage(1);
-    router.push(`?query=${e.target.value}&page=1`);
+    router.push(`?query=${e.target.value}&page=1&division_id=${divisionId}`);
   };
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
-    router.push(`?query=${query}&page=${page}`);
+    router.push(`?query=${query}&page=${page}&division_id=${divisionId}`);
+  };
+
+  const handleDivisionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setDivisionId(e.target.value || null);
+    setCurrentPage(1);
+    router.push(`?query=${query}&page=1&division_id=${e.target.value || ""}`);
   };
 
   return (
@@ -46,6 +57,16 @@ export default function EmployeesContent() {
             placeholder="Search employees..."
             className="p-2 px-4 border rounded bg-background rounded-full max-w-sm w-full"
           />
+          <select
+            value={divisionId || ""}
+            onChange={handleDivisionChange}
+            className="p-2 px-4 border rounded bg-background rounded-full max-w-sm w-full"
+          >
+            <option value="">Select Division</option>
+            <option value="0f997520-08d3-4fb8-910e-de2ccaa71a77">
+              Full Stack
+            </option>
+          </select>
           <button className="w-fit bg-primary font-semibold text-white px-4 py-1 text-sm rounded-md hover:bg-primary/80 flex items-center gap-2">
             <Plus className="h-4 w-4" />
             Create Employee
