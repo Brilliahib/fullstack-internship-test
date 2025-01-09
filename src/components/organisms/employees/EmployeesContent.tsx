@@ -93,15 +93,19 @@ export default function EmployeesContent() {
         <table className="w-full table-auto border border-gray-300 border-collapse rounded-xl">
           <thead>
             <tr>
-              <th className="border-b border-gray-300 p-2 text-left">Name</th>
-              <th className="border-b border-gray-300 p-2 text-left">Phone</th>
-              <th className="border-b border-gray-300 p-2 text-left">
+              <th className="border-b border-gray-300 p-2 text-left text-muted-foreground font-medium">
+                Name
+              </th>
+              <th className="border-b border-gray-300 p-2 text-left text-muted-foreground font-medium">
+                Phone
+              </th>
+              <th className="border-b border-gray-300 p-2 text-left text-muted-foreground font-medium">
                 Division
               </th>
-              <th className="border-b border-gray-300 p-2 text-left">
+              <th className="border-b border-gray-300 p-2 text-left text-muted-foreground font-medium">
                 Position
               </th>
-              <th className="border-b border-gray-300 p-2 text-left"></th>
+              <th className="border-b border-gray-300 p-2 text-left text-muted-foreground font-medium"></th>
             </tr>
           </thead>
           <tbody>
@@ -136,17 +140,18 @@ export default function EmployeesContent() {
                 </td>
               </tr>
             ))}
-            {!data?.data.employees && (
-              <tr>
-                <td colSpan={5} className="text-center p-4">
-                  No employees found.
-                </td>
-              </tr>
-            )}
+            {!data?.data.employees ||
+              (data?.data.employees.length === 0 && (
+                <tr>
+                  <td colSpan={5} className="text-center p-4">
+                    No employees found.
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
 
-        <div className="mt-4">
+        <div className="mt-2">
           <Pagination
             totalItems={data?.pagination.total || 0}
             itemsPerPage={data?.pagination.per_page || 10}
