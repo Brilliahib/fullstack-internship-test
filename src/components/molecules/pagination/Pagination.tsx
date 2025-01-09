@@ -42,7 +42,7 @@ export default function Pagination({
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="px-3 py-1 mx-1 border rounded bg-background disabled:opacity-50"
+        className="px-3 py-2 mx-1 border rounded bg-background disabled:opacity-50"
       >
         <ChevronRight />
       </button>

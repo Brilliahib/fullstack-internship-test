@@ -3,6 +3,7 @@ import { Figtree } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { Toaster } from "sonner";
+import GlobalProvider from "@/components/organisms/GlobalProvider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -30,10 +31,12 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <main className="font-figtree">
-            {children}
-            <Toaster richColors />
-          </main>
+          <GlobalProvider>
+            <main className="font-figtree">
+              {children}
+              <Toaster richColors />
+            </main>
+          </GlobalProvider>
         </ThemeProvider>
       </body>
     </html>
