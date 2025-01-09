@@ -3,7 +3,7 @@
 import Pagination from "@/components/molecules/pagination/Pagination";
 import { useGetAllDivision } from "@/http/division/get-all-division";
 import { useGetAllEmployees } from "@/http/employees/get-all-employees";
-import { Plus } from "lucide-react";
+import { Pencil, Plus, Trash2 } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -65,7 +65,7 @@ export default function EmployeesContent() {
             value={query}
             onChange={handleSearch}
             placeholder="Search employees..."
-            className="p-2 px-4 border rounded bg-background rounded-full max-w-sm w-full"
+            className="p-2 px-4 border rounded bg-background rounded-xl max-w-sm w-full"
           />
           <div className="flex gap-4 w-full justify-end">
             <select
@@ -90,31 +90,55 @@ export default function EmployeesContent() {
             </button>
           </div>
         </div>
-        <table className="w-full table-auto border-collapse border border-gray-300 rounded-xl">
+        <table className="w-full table-auto border border-gray-300 border-collapse rounded-xl">
           <thead>
             <tr>
-              <th className="border border-gray-300 p-2">Name</th>
-              <th className="border border-gray-300 p-2">Phone</th>
-              <th className="border border-gray-300 p-2">Division</th>
-              <th className="border border-gray-300 p-2">Position</th>
+              <th className="border-b border-gray-300 p-2 text-left">Name</th>
+              <th className="border-b border-gray-300 p-2 text-left">Phone</th>
+              <th className="border-b border-gray-300 p-2 text-left">
+                Division
+              </th>
+              <th className="border-b border-gray-300 p-2 text-left">
+                Position
+              </th>
+              <th className="border-b border-gray-300 p-2 text-left"></th>
             </tr>
           </thead>
           <tbody>
             {data?.data.employees.map((employee) => (
               <tr key={employee.id}>
-                <td className="border border-gray-300 p-2">{employee.name}</td>
-                <td className="border border-gray-300 p-2">{employee.phone}</td>
-                <td className="border border-gray-300 p-2">
+                <td className="border-b border-gray-300 p-2">
+                  {employee.name}
+                </td>
+                <td className="border-b border-gray-300 p-2">
+                  {employee.phone}
+                </td>
+                <td className="border-b border-gray-300 p-2">
                   {employee.division.name}
                 </td>
-                <td className="border border-gray-300 p-2">
+                <td className="border-b border-gray-300 p-2">
                   {employee.position}
+                </td>
+                <td className="border-b border-gray-300 p-2">
+                  <div className="flex items-center gap-4 w-fit">
+                    <Link
+                      href={""}
+                      className="flex items-center gap-2 hover:underline text-yellow-600 hover:text-yellow-800"
+                    >
+                      <Pencil className="h-4 w-4" />
+                      Edit
+                    </Link>
+                    <div className="flex items-center gap-2 text-red-600 hover:text-red-800 hover:underline">
+                      <Trash2 className="h-4 w-4" />
+                      Delete
+                    </div>
+                  </div>
                 </td>
               </tr>
             ))}
             {!data?.data.employees && (
               <tr>
-                <td colSpan={4} className="text-center p-4">
+                <td colSpan={5} className="text-center p-4">
                   No employees found.
                 </td>
               </tr>

@@ -15,8 +15,6 @@ export default function Pagination({
 }: PaginationProps) {
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-  if (totalPages === 1) return null;
-
   return (
     <div className="flex justify-end py-4">
       <button
