@@ -135,7 +135,7 @@ export default function EmployeesContent() {
                       Detail
                     </Link>
                     <Link
-                      href={""}
+                      href={`/employees/${employee.id}/edit`}
                       className="flex items-center gap-2 hover:underline text-yellow-600 hover:text-yellow-800"
                     >
                       <Pencil className="h-4 w-4" />
