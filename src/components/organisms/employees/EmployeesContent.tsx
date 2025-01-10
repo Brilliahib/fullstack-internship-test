@@ -1,13 +1,17 @@
 "use client";
 
+import DeleteEmployeeDialog from "@/components/atoms/dialog/DialogDeleteEmployee";
 import Pagination from "@/components/molecules/pagination/Pagination";
 import { useGetAllDivision } from "@/http/division/get-all-division";
+import { useDeleteEmployee } from "@/http/employees/delete-employees";
 import { useGetAllEmployees } from "@/http/employees/get-all-employees";
+import { useQueryClient } from "@tanstack/react-query";
 import { Eye, Pencil, Plus, Trash2 } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
+import { toast } from "sonner";
 
 export default function EmployeesContent() {
   const { data: session, status } = useSession();
@@ -21,6 +25,11 @@ export default function EmployeesContent() {
   const [divisionId, setDivisionId] = useState<string | null>(
     searchParams.get("division_id") || null
   );
+  const [isDialogOpen, setDialogOpen] = useState(false);
+  const [employeeToDelete, setEmployeeToDelete] = useState<{
+    id: string;
+    name: string;
+  } | null>(null);
 
   const { data, isPending } = useGetAllEmployees(
     session?.access_token as string,
@@ -38,6 +47,39 @@ export default function EmployeesContent() {
       enabled: status === "authenticated",
     }
   );
+
+  const queryClient = useQueryClient();
+
+  const { mutate: deleteEmployeeHandler, isPending: isDeletePending } =
+    useDeleteEmployee({
+      onSuccess: () => {
+        toast.success("Berhasil menghapus employee");
+        queryClient.invalidateQueries({
+          queryKey: ["employees-list"],
+        });
+        setDialogOpen(false);
+      },
+      onError: (error) => {
+        toast.error("Gagal menghapus employee", {
+          description: error.response?.data.message,
+        });
+      },
+    });
+
+  const handleDeleteEmployee = (employeeId: string, employeeName: string) => {
+    setEmployeeToDelete({ id: employeeId, name: employeeName });
+    setDialogOpen(true);
+  };
+
+  const handleConfirmDelete = () => {
+    if (employeeToDelete && session?.access_token) {
+      const deletePayload = {
+        id: employeeToDelete.id,
+        token: session.access_token,
+      };
+      deleteEmployeeHandler(deletePayload);
+    }
+  };
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
@@ -141,7 +183,12 @@ export default function EmployeesContent() {
                       <Pencil className="h-4 w-4" />
                       Edit
                     </Link>
-                    <div className="flex items-center gap-2 text-red-600 hover:text-red-800 hover:underline">
+                    <div
+                      className="flex items-center gap-2 text-red-600 hover:text-red-800 hover:underline cursor-pointer"
+                      onClick={() =>
+                        handleDeleteEmployee(employee.id, employee.name)
+                      }
+                    >
                       <Trash2 className="h-4 w-4" />
                       Delete
                     </div>
@@ -169,6 +216,12 @@ export default function EmployeesContent() {
           />
         </div>
       </div>
+      <DeleteEmployeeDialog
+        open={isDialogOpen}
+        onClose={() => setDialogOpen(false)}
+        onDelete={handleConfirmDelete}
+        employeeName={employeeToDelete?.name || ""}
+      />
     </>
   );
 }

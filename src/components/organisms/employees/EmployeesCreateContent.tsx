@@ -178,7 +178,7 @@ export default function EmployeesCreateContent() {
               disabled={isPending}
               className="w-fit bg-primary text-white rounded-md px-4 py-2 hover:bg-primary/80 focus:outline-none focus:ring-1 focus:ring-blue-400"
             >
-              {isPending ? "Menambahkan..." : "Tambah Employee"}
+              {isPending ? "Menambahkan..." : "Create Employee"}
             </button>
           </div>
         </form>
