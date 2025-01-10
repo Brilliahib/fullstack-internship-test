@@ -21,11 +21,11 @@ export default function Pagination({
 
   return (
     <>
-      <div className="flex justify-between py-4">
-        <p>
+      <div className="flex md:flex-row flex-col justify-between py-4 md:space-y-0 space-y-4">
+        <p className="md:text-left text-center">
           Menampilkan {startItem} - {endItem} dari {totalItems} data
         </p>
-        <div className="flex justify-end">
+        <div className="flex md:justify-end justify-center">
           <button
             onClick={() => onPageChange(currentPage - 1)}
             disabled={currentPage === 1}

@@ -134,78 +134,80 @@ export default function EmployeesContent() {
             </button>
           </div>
         </div>
-        <table className="w-full table-auto border border-gray-300 border-collapse rounded-xl">
-          <thead>
-            <tr>
-              <th className="border-b border-gray-300 p-2 text-left text-muted-foreground font-medium">
-                Name
-              </th>
-              <th className="border-b border-gray-300 p-2 text-left text-muted-foreground font-medium">
-                Phone
-              </th>
-              <th className="border-b border-gray-300 p-2 text-left text-muted-foreground font-medium">
-                Division
-              </th>
-              <th className="border-b border-gray-300 p-2 text-left text-muted-foreground font-medium">
-                Position
-              </th>
-              <th className="border-b border-gray-300 p-2 text-left text-muted-foreground font-medium"></th>
-            </tr>
-          </thead>
-          <tbody>
-            {data?.data.employees.map((employee) => (
-              <tr key={employee.id}>
-                <td className="border-b border-gray-300 p-2">
-                  {employee.name}
-                </td>
-                <td className="border-b border-gray-300 p-2">
-                  {employee.phone}
-                </td>
-                <td className="border-b border-gray-300 p-2">
-                  {employee.division.name}
-                </td>
-                <td className="border-b border-gray-300 p-2">
-                  {employee.position}
-                </td>
-                <td className="border-b border-gray-300 p-2">
-                  <div className="flex items-center gap-4 w-fit">
-                    <Link
-                      href={`/employees/${employee.id}`}
-                      className="flex items-center gap-2 hover:underline"
-                    >
-                      <Eye className="h-4 w-4" />
-                      Detail
-                    </Link>
-                    <Link
-                      href={`/employees/${employee.id}/edit`}
-                      className="flex items-center gap-2 hover:underline text-yellow-600 hover:text-yellow-800"
-                    >
-                      <Pencil className="h-4 w-4" />
-                      Edit
-                    </Link>
-                    <div
-                      className="flex items-center gap-2 text-red-600 hover:text-red-800 hover:underline cursor-pointer"
-                      onClick={() =>
-                        handleDeleteEmployee(employee.id, employee.name)
-                      }
-                    >
-                      <Trash2 className="h-4 w-4" />
-                      Delete
-                    </div>
-                  </div>
-                </td>
+        <div className="overflow-x-auto">
+          <table className="w-full table-auto border border-gray-300 border-collapse rounded-xl">
+            <thead>
+              <tr>
+                <th className="border-b border-gray-300 p-2 text-left text-muted-foreground font-medium">
+                  Name
+                </th>
+                <th className="border-b border-gray-300 p-2 text-left text-muted-foreground font-medium">
+                  Phone
+                </th>
+                <th className="border-b border-gray-300 p-2 text-left text-muted-foreground font-medium">
+                  Division
+                </th>
+                <th className="border-b border-gray-300 p-2 text-left text-muted-foreground font-medium">
+                  Position
+                </th>
+                <th className="border-b border-gray-300 p-2 text-left text-muted-foreground font-medium"></th>
               </tr>
-            ))}
-            {!data?.data.employees ||
-              (data?.data.employees.length === 0 && (
-                <tr>
-                  <td colSpan={5} className="text-center p-4">
-                    No employees found.
+            </thead>
+            <tbody>
+              {data?.data.employees.map((employee) => (
+                <tr key={employee.id}>
+                  <td className="border-b border-gray-300 p-2">
+                    {employee.name}
+                  </td>
+                  <td className="border-b border-gray-300 p-2">
+                    {employee.phone}
+                  </td>
+                  <td className="border-b border-gray-300 p-2">
+                    {employee.division.name}
+                  </td>
+                  <td className="border-b border-gray-300 p-2">
+                    {employee.position}
+                  </td>
+                  <td className="border-b border-gray-300 p-2">
+                    <div className="flex items-center gap-4 w-fit">
+                      <Link
+                        href={`/employees/${employee.id}`}
+                        className="flex items-center gap-2 hover:underline"
+                      >
+                        <Eye className="h-4 w-4" />
+                        Detail
+                      </Link>
+                      <Link
+                        href={`/employees/${employee.id}/edit`}
+                        className="flex items-center gap-2 hover:underline text-yellow-600 hover:text-yellow-800"
+                      >
+                        <Pencil className="h-4 w-4" />
+                        Edit
+                      </Link>
+                      <div
+                        className="flex items-center gap-2 text-red-600 hover:text-red-800 hover:underline cursor-pointer"
+                        onClick={() =>
+                          handleDeleteEmployee(employee.id, employee.name)
+                        }
+                      >
+                        <Trash2 className="h-4 w-4" />
+                        Delete
+                      </div>
+                    </div>
                   </td>
                 </tr>
               ))}
-          </tbody>
-        </table>
+              {!data?.data.employees ||
+                (data?.data.employees.length === 0 && (
+                  <tr>
+                    <td colSpan={5} className="text-center p-4">
+                      No employees found.
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
 
         <div className="mt-2">
           <Pagination

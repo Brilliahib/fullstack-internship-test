@@ -1,6 +1,7 @@
 "use client"; // Menambahkan direktif "use client" agar komponen hanya berjalan di sisi klien
 
 import { generateFallbackFromName } from "@/utils/misc";
+import { LogOut } from "lucide-react";
 import { Session } from "next-auth";
 import { signOut } from "next-auth/react";
 import { useState } from "react";
@@ -66,15 +67,16 @@ export default function NavButton({ session }: NavButtonProps) {
             aria-labelledby="options-menu"
           >
             <li>
-              <p className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+              <p className="block px-4 py-2 text-base hover:bg-gray-100">
                 {session.user.name}
               </p>
             </li>
             <li>
               <button
-                onClick={() => signOut({ callbackUrl: "/login" })}
-                className="w-full text-left block hover:bg-red-200/40 px-4 py-2 text-red-600 text-sm"
+                onClick={() => signOut({ callbackUrl: "/" })}
+                className="w-full text-left block hover:bg-red-200/40 px-4 py-2 text-red-600 flex gap-2 items-center"
               >
+                <LogOut className="h-4 w-4" />
                 Logout
               </button>
             </li>

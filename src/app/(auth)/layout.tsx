@@ -10,7 +10,7 @@ export default function AuthLayout({ children }: PropsWithChildren) {
 
   useEffect(() => {
     if (session) {
-      router.push("/");
+      router.push("/employees");
     }
   }, [session, router]);
 
