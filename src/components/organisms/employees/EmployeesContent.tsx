@@ -3,7 +3,7 @@
 import Pagination from "@/components/molecules/pagination/Pagination";
 import { useGetAllDivision } from "@/http/division/get-all-division";
 import { useGetAllEmployees } from "@/http/employees/get-all-employees";
-import { Pencil, Plus, Trash2 } from "lucide-react";
+import { Eye, Pencil, Plus, Trash2 } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -75,7 +75,9 @@ export default function EmployeesContent() {
             >
               <option value="">All Division</option>
               {division?.data.divisions.map((division) => (
-                <option value={division.id}>{division.name}</option>
+                <option key={division.id} value={division.id}>
+                  {division.name}
+                </option>
               ))}
             </select>
 
@@ -125,6 +127,13 @@ export default function EmployeesContent() {
                 </td>
                 <td className="border-b border-gray-300 p-2">
                   <div className="flex items-center gap-4 w-fit">
+                    <Link
+                      href={`/employees/${employee.id}`}
+                      className="flex items-center gap-2 hover:underline"
+                    >
+                      <Eye className="h-4 w-4" />
+                      Detail
+                    </Link>
                     <Link
                       href={""}
                       className="flex items-center gap-2 hover:underline text-yellow-600 hover:text-yellow-800"
