@@ -15,37 +15,46 @@ export default function Pagination({
 }: PaginationProps) {
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-  if (totalPages === 1) return null;
+  const startItem = totalItems === 0 ? 0 : (currentPage - 1) * itemsPerPage + 1;
+  const endItem =
+    totalItems === 0 ? 0 : Math.min(currentPage * itemsPerPage, totalItems);
 
   return (
-    <div className="flex justify-end py-4">
-      <button
-        onClick={() => onPageChange(currentPage - 1)}
-        disabled={currentPage === 1}
-        className="px-3 py-2 mx-1 border rounded bg-background disabled:opacity-50"
-      >
-        <ChevronLeft />
-      </button>
-      {Array.from({ length: totalPages }, (_, index) => (
-        <button
-          key={index}
-          onClick={() => onPageChange(index + 1)}
-          className={`px-4 py-2 mx-1 border rounded-md ${
-            currentPage === index + 1
-              ? "bg-blue-500 text-white"
-              : "bg-background"
-          }`}
-        >
-          {index + 1}
-        </button>
-      ))}
-      <button
-        onClick={() => onPageChange(currentPage + 1)}
-        disabled={currentPage === totalPages}
-        className="px-3 py-1 mx-1 border rounded bg-background disabled:opacity-50"
-      >
-        <ChevronRight />
-      </button>
-    </div>
+    <>
+      <div className="flex md:flex-row flex-col justify-between py-4 md:space-y-0 space-y-4">
+        <p className="md:text-left text-center">
+          Menampilkan {startItem} - {endItem} dari {totalItems} data
+        </p>
+        <div className="flex md:justify-end justify-center">
+          <button
+            onClick={() => onPageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+            className="px-3 py-2 mx-1 border rounded bg-background disabled:opacity-50"
+          >
+            <ChevronLeft className="h-4 w-4" />
+          </button>
+          {Array.from({ length: totalPages }, (_, index) => (
+            <button
+              key={index}
+              onClick={() => onPageChange(index + 1)}
+              className={`px-4 py-2 mx-1 border shadow-sm rounded-md ${
+                currentPage === index + 1
+                  ? "bg-primary text-white"
+                  : "bg-background"
+              }`}
+            >
+              {index + 1}
+            </button>
+          ))}
+          <button
+            onClick={() => onPageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className="px-3 py-2 mx-1 border rounded bg-background disabled:opacity-50"
+          >
+            <ChevronRight className="h-4 w-4" />
+          </button>
+        </div>
+      </div>
+    </>
   );
 }
