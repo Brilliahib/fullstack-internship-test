@@ -1,3 +1,4 @@
+import SectionTitle from "@/components/molecules/typography/SectionTitle";
 import EmployeesDetailContent from "@/components/organisms/employees/EmployeesDetailContent";
 import Navbar from "@/components/organisms/nav/Navbar";
 
@@ -12,6 +13,7 @@ export default async function EmployeesDetailPage({
   return (
     <>
       <Navbar />
+      <SectionTitle title="Detail Employees" />
       <EmployeesDetailContent id={String(id)} />
     </>
   );
