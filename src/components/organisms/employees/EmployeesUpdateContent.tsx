@@ -87,7 +87,7 @@ export default function EmployeesUpdateContent({
         },
         onSuccess: () => {
           toast.success("Berhasil Mengupdate Employee");
-          router.push("/");
+          router.push("/employees");
         },
       }
     );

@@ -62,9 +62,9 @@ export default function EmployeesCreateContent() {
     onSuccess: () => {
       toast.success("Berhasil Menambahkan Employee");
       queryClient.invalidateQueries({
-        queryKey: ["materials-list"],
+        queryKey: ["employees-list", query],
       });
-      router.push("/");
+      router.push("/employees");
     },
   });
 

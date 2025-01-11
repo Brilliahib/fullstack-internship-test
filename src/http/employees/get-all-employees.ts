@@ -26,7 +26,7 @@ export const GetAllEmployeesHandler = async (
     headers: {
       Authorization: `Bearer ${token}`,
     },
-    params, // menambahkan query parameters
+    params,
   });
 
   return data;

@@ -101,7 +101,7 @@ export default function EmployeesContent() {
   return (
     <>
       <div className="pad-x-xl py-8">
-        <div className="flex justify-between mb-8">
+        <div className="flex md:flex-row flex-col justify-between mb-8 gap-4">
           <input
             type="text"
             value={query}
