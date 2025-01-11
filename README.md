@@ -8,8 +8,7 @@ This repo will be used for internship test from Aksamedia.
 
 ## Account Testing
 
-username: admin
-password: pastibisa
+username: admin, password: pastibisa
 
 ## Backend
 
