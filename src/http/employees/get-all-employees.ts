@@ -15,11 +15,13 @@ interface GetAllEmployeesResponse {
 export const GetAllEmployeesHandler = async (
   token: string,
   query: string,
-  divisionId: string | null
+  divisionId: string | null,
+  currentPage: number
 ): Promise<GetAllEmployeesResponse> => {
   const params: Record<string, string | undefined> = {
     name: query || undefined,
     division_id: divisionId || undefined,
+    page: currentPage.toString(),
   };
 
   const { data } = await api.get<GetAllEmployeesResponse>("/employees", {
@@ -36,11 +38,13 @@ export const useGetAllEmployees = (
   token: string,
   query: string,
   divisionId: string | null,
+  currentPage: number,
   options?: Partial<UseQueryOptions<GetAllEmployeesResponse, AxiosError>>
 ) => {
   return useQuery({
-    queryKey: ["employees-list", query, divisionId],
-    queryFn: () => GetAllEmployeesHandler(token, query, divisionId),
+    queryKey: ["employees-list", query, divisionId, currentPage],
+    queryFn: () =>
+      GetAllEmployeesHandler(token, query, divisionId, currentPage),
     ...options,
   });
 };

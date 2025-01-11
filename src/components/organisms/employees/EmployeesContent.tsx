@@ -35,6 +35,7 @@ export default function EmployeesContent() {
     session?.access_token as string,
     query,
     divisionId,
+    currentPage,
     {
       enabled: status === "authenticated",
     }
