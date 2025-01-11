@@ -1,7 +1,9 @@
 "use client";
 
 import { useGetEmployeeDetail } from "@/http/employees/get-detail-employees";
+import { baseUrl } from "@/utils/app";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 
 interface EmployeesDetailContentProps {
   id: string;
@@ -35,6 +37,16 @@ export default function EmployeesDetailContent({
             <div className="space-y-1">
               <h1>Division</h1>
               <p>{data?.data.employee.division.name}</p>
+            </div>
+            <div className="space-y-1">
+              <h1>Image</h1>
+              <Image
+                src={`${baseUrl}/${data?.data.employee.image}`}
+                alt={data?.data.employee.name ?? "Image Employee"}
+                width={1000}
+                height={1000}
+                className="max-h-[300px] object-cover rounded-xl"
+              />
             </div>
           </div>
         </div>

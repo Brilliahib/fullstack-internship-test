@@ -5,9 +5,11 @@ import Pagination from "@/components/molecules/pagination/Pagination";
 import { useGetAllDivision } from "@/http/division/get-all-division";
 import { useDeleteEmployee } from "@/http/employees/delete-employees";
 import { useGetAllEmployees } from "@/http/employees/get-all-employees";
+import { baseUrl } from "@/utils/app";
 import { useQueryClient } from "@tanstack/react-query";
 import { Eye, Pencil, Plus, Trash2 } from "lucide-react";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
@@ -151,6 +153,9 @@ export default function EmployeesContent() {
                 <th className="border-b border-gray-300 p-2 text-left text-muted-foreground font-medium">
                   Position
                 </th>
+                <th className="border-b border-gray-300 p-2 text-left text-muted-foreground font-medium">
+                  Image
+                </th>
                 <th className="border-b border-gray-300 p-2 text-left text-muted-foreground font-medium"></th>
               </tr>
             </thead>
@@ -168,6 +173,15 @@ export default function EmployeesContent() {
                   </td>
                   <td className="border-b border-gray-300 p-2">
                     {employee.position}
+                  </td>
+                  <td className="border-b border-gray-300 p-2">
+                    <Image
+                      src={`${baseUrl}/${employee.image}`}
+                      alt={employee.name ?? "Image Employee"}
+                      width={1000}
+                      height={1000}
+                      className="max-h-[100px] max-w-[100px] object-cover"
+                    />
                   </td>
                   <td className="border-b border-gray-300 p-2">
                     <div className="flex items-center gap-4 w-fit">
