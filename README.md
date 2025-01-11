@@ -6,10 +6,10 @@ This repo will be used for internship test from Aksamedia.
 
 </div>
 
-## Backend
+## Account Testing
 
-1. Repository backend (https://github.com/Brilliahib/be-internship-test)
-2. Url backend (https://semuabeli.com)
+username: admin
+password: pastibisa
 
 ## Backend
 
