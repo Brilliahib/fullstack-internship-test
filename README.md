@@ -6,6 +6,10 @@ This repo will be used for internship test from Aksamedia.
 
 </div>
 
+## Account Testing
+
+username: admin, password: pastibisa
+
 ## Backend
 
 1. Repository backend (https://github.com/Brilliahib/be-internship-test)
