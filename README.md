@@ -11,6 +11,11 @@ This repo will be used for internship test from Aksamedia.
 1. Repository backend (https://github.com/Brilliahib/be-internship-test)
 2. Url backend (https://semuabeli.com)
 
+## Backend
+
+1. Repository backend (https://github.com/Brilliahib/be-internship-test)
+2. Url backend (https://semuabeli.com)
+
 ## Prerequisite
 
 1. NodeJS (^18)
