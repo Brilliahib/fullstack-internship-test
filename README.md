@@ -1,22 +1,27 @@
 <div align="center">
   
-    # FULLSTACK INTERNSHIP TEST
+# FULLSTACK INTERNSHIP TEST
 
 Frontend will be use as the base app for SusunJadwal.
 
 </div>
 
+## Backend
+
+1. Repository backend (https://github.com/Brilliahib/be-internship-test)
+2. Url backend (https://semuabeli.com)
+
 ## Prerequisite
 
 1. NodeJS (^18)
-2. pnpm (package manager)
+2. npm
 
 ## Installation
 
 1. Clone this repository
 
    ```sh
-   git clone https://github.com/Brilliahib/cms-susunjadwal
+   git clone https://github.com/Brilliahib/fullstack-internship-test
    ```
 
 2. Install dependencies
@@ -72,7 +77,7 @@ Frontend will be use as the base app for SusunJadwal.
 
 ```
 .
-└── cms-susunjadwal/
+└── fullstack-internship-test/
     ├── .next
     ├── node_modules
     ├── public
