@@ -2,7 +2,7 @@
   
 # FULLSTACK INTERNSHIP TEST
 
-Frontend will be use as the base app for SusunJadwal.
+This repo will be used for internship test from Aksamedia.
 
 </div>
 
