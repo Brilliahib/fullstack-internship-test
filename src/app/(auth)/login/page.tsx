@@ -56,7 +56,7 @@ export default function LoginPage() {
           height={1381}
           className="h-full object-cover"
         />
-        <div className="flex h-full items-center justify-center bg-background px-4">
+        <div className="flex h-full items-center justify-center bg-background px-8">
           <div className="w-full md:max-w-md text-left">
             <div className="space-y-1 mb-8">
               <h1 className="text-3xl font-bold">Login</h1>
